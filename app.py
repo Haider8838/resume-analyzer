@@ -1,3 +1,8 @@
+import spacy
+
+# Load model directly (it’s now installed via requirements.txt)
+nlp = spacy.load("en_core_web_sm")
+
 import streamlit as st
 import os
 import spacy
@@ -8,7 +13,7 @@ from job_matcher import compute_match_score
 try:
     nlp = spacy.load("en_core_web_sm")
 except:
-    os.system("python -m spacy download en_core_web_sm")
+    
     nlp = spacy.load("en_core_web_sm")
 
 import streamlit as st

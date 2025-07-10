@@ -1,15 +1,19 @@
 import streamlit as st
+import os
+import spacy
 from resume_parser import extract_text_from_pdf, extract_text_from_docx
 from job_matcher import compute_match_score
-import spacy
-import os
 
-# Download the model if not already available
+# Download spaCy model if not found
 try:
     nlp = spacy.load("en_core_web_sm")
 except:
     os.system("python -m spacy download en_core_web_sm")
     nlp = spacy.load("en_core_web_sm")
+
+import streamlit as st
+from resume_parser import extract_text_from_pdf, extract_text_from_docx
+from job_matcher import compute_match_score
 
 st.set_page_config(page_title="Smart Resume Analyzer")
 

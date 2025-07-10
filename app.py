@@ -1,22 +1,13 @@
 import streamlit as st
-import os
 import spacy
 from resume_parser import extract_text_from_pdf, extract_text_from_docx
 from job_matcher import compute_match_score
 
-# Download spaCy model if not found
-try:
-    nlp = spacy.load("en_core_web_sm")
-except:
-    
-    nlp = spacy.load("en_core_web_sm")
+# ✅ Load spaCy model (it will be pre-installed via requirements.txt)
+nlp = spacy.load("en_core_web_sm")
 
-import streamlit as st
-from resume_parser import extract_text_from_pdf, extract_text_from_docx
-from job_matcher import compute_match_score
-
+# ✅ Streamlit UI starts here
 st.set_page_config(page_title="Smart Resume Analyzer")
-
 st.title("🧠 Smart Resume Analyzer")
 st.write("Upload your resume and a job description to see how well they match!")
 
@@ -29,7 +20,8 @@ if st.button("Analyze") and resume_file and job_desc:
     else:
         resume_text = extract_text_from_docx(resume_file)
 
-    score = compute_match_score(resume_text, job_desc)
+    # ✅ Pass nlp model into compute_match_score
+    score = compute_match_score(resume_text, job_desc, nlp)
 
     st.success(f"✅ Resume Match Score: **{score}%**")
 
